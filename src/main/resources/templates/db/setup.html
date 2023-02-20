@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h3>Форма для создания новой настольной игры</h3>
+    <form th:action="@{/db/newToy}" th:method="POST" th:object="${newCardGame}">
+        <label for="CardGameName">Введите название игры:</label>
+        <input id="CardGameName" th:field="*{name}" type="text"/>
+        <br/>
+        <label for="peopleCount">Введите количество игроков:</label>
+        <input id="peopleCount" th:field="*{peopleCount}" type="text"/>
+        <br/>
+        <label for="CardGameTheme">Введите тему игры:</label>
+        <input id="CardGameTheme" th:field="*{theme}" type="text"/>
+        <br/>
+        <button type="submit" th:name="itemType" th:value="CardGame">Создать новую настольную игру</button>
+    </form>
+</div>
+<br/>
+<div>
+    <h3>Форма для создания новой куклы</h3>
+    <form th:action="@{/db/newToy}" th:method="POST" th:object="${newDoll}">
+        <label for="DollName">Введите название куклы:</label>
+        <input id="DollName" th:field="*{name}" type="text"/>
+        <br/>
+        <label for="DollSize">Введите размер куклы (большая/маленькая):</label>
+        <input id="DollSize" th:field="*{size}" type="text"/>
+        <br/>
+        <label for="DollTheme">Введите тематику куклы:</label>
+        <input id="DollTheme" th:field="*{theme}" type="text"/>
+        <br/>
+        <button type="submit" th:name="itemType" th:value="Doll">Создать новую куклу</button>
+    </form>
+</div>
+<br/>
+<div>
+    <h3>Форма для создания нового конструктора</h3>
+    <form th:action="@{/db/newToy}" th:method="POST" th:object="${newLego}">
+        <label for="LegoName">Введите название конструктора:</label>
+        <input id="LegoName" th:field="*{name}" type="text"/>
+        <br/>
+        <label for="LegoSize">Введите размер конструктора (большой/маленький):</label>
+        <input id="LegoSize" th:field="*{size}" type="text"/>
+        <br/>
+        <label for="LegoTheme">Введите тематику конструктора:</label>
+        <input id="LegoTheme" th:field="*{theme}" type="text"/>
+        <br/>
+        <button type="submit" th:name="itemType" th:value="Lego">Создать новый конструктор</button>
+    </form>
+</div>
+<br/>
+<div>
+    <h3>Форма для создания нового робота</h3>
+    <form th:action="@{/db/newToy}" th:method="POST" th:object="${newRobot}">
+        <label for="RobotName">Введите название робота:</label>
+        <input id="RobotName" th:field="*{name}" type="text"/>
+        <br/>
+        <label for="RobotType">Введите тип робота:</label>
+        <input id="RobotType" th:field="*{type}" type="text"/>
+        <br/>
+        <label for="RobotAction">Введите действие робота:</label>
+        <input id="RobotAction" th:field="*{action}" type="text"/>
+        <br/>
+        <button type="submit" th:name="itemType" th:value="Robot">Создать нового робота</button>
+    </form>
+</div>
+<br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Карточные игры</th>
+        <th>Куклы</th>
+        <th>Конструкторы</th>
+        <th>Роботы</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th>
+        <table>
+            <tr th:each="cardGame : ${CardGames}">
+                <td th:text="${cardGame.getProperty()}">
+                </td>
+            </tr>
+        </table>
+    </th>
+    <th>
+        <table>
+            <tr th:each="doll : ${Dolls}">
+                <td th:text="${doll.getProperty()}">
+                </td>
+            </tr>
+        </table>
+    </th>
+    <th>
+        <table>
+            <tr th:each="lego : ${Legos}">
+                <td th:text="${lego.getProperty()}">
+                </td>
+            </tr>
+        </table>
+    </th>
+    <th>
+        <table>
+            <tr th:each="robot : ${Robots}">
+                <td th:text="${robot.getProperty()}">
+                </td>
+            </tr>
+        </table>
+    </th>
+    </tbody>
+</table>
+
+</body>
+</html>

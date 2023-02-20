@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Check</title>
+</head>
+<body>
+
+<h1>Ваш результат:</h1>
+
+<h2 th:text="${guestValues}"></h2>
+<p th:text="${message}"></p>
+
+<form th:action="@{/start}" th:method="POST">
+    <label>
+        <input th:type="submit" value="Ещё раз">
+    </label>
+</form>
+
+</body>
+</html>

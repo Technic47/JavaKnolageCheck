@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lottery</title>
+</head>
+<body>
+
+<h1 th:text="'Здравствуй, ' + ${username}"></h1>
+
+<div th:if="${username} == 'admin'">
+    <form th:action="@{/db/setup}">
+        <label>
+            <input th:type="submit" value="Настройка базы игрушек">
+        </label>
+    </form>
+</div>
+
+<p>
+    Компьютер загадал 10 чисел.
+    Попробуйте угадать их все и получи приз.
+    Вводи либо 0, либо 1.
+</p>
+
+<form th:action="@{/results}" th:method="POST">
+    <div>
+        <label for="first">#1 : </label>
+        <input id="first" type="text" th:name="first">
+    </div>
+    <div>
+        <label for="second">#2 : </label>
+        <input id="second" type="text" th:name="second">
+    </div>
+    <div>
+        <label for="third">#3 : </label>
+        <input id="third" type="text" th:name="third">
+    </div>
+    <div>
+        <label for="fourth">#4 : </label>
+        <input id="fourth" type="text" th:name="fourth">
+    </div>
+    <div>
+        <label for="fifth">#5 : </label>
+        <input id="fifth" type="text" th:name="fifth">
+    </div>
+    <div>
+        <label for="sixth">#6 : </label>
+        <input id="sixth" type="text" th:name="sixth">
+    </div>
+    <div>
+        <label for="seventh">#7 : </label>
+        <input id="seventh" type="text" th:name="seventh">
+    </div>
+    <div>
+        <label for="eighth">#8 : </label>
+        <input id="eighth" type="text" th:name="eighth">
+    </div>
+    <div>
+        <label for="ninth">#9 : </label>
+        <input id="ninth" type="text" th:name="ninth">
+    </div>
+    <div>
+        <label for="tenth">#10: </label>
+        <input id="tenth" type="text" th:name="tenth">
+    </div>
+
+    <input type="submit"/>
+</form>
+
+</body>
+</html>
