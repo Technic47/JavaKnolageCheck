@@ -1,6 +1,7 @@
 package ru.homework.task2.models.Toys.abstacts;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public abstract class Toy implements Droppable, Serializable {
     protected Long id;
@@ -56,5 +57,18 @@ public abstract class Toy implements Droppable, Serializable {
 
     public void setDropRate(Double dropRate) {
         this.dropRate = dropRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Toy)) return false;
+        Toy toy = (Toy) o;
+        return Objects.equals(id, toy.id) && Objects.equals(name, toy.name) && Objects.equals(property, toy.property) && Objects.equals(dropRate, toy.dropRate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, property, dropRate);
     }
 }

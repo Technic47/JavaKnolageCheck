@@ -2,6 +2,8 @@ package ru.homework.task2.models.Toys.toyClasses;
 
 import ru.homework.task2.models.Toys.abstacts.RegularToy;
 
+import java.util.Objects;
+
 import static org.thymeleaf.util.StringUtils.concat;
 
 public class Doll extends RegularToy {
@@ -36,5 +38,18 @@ public class Doll extends RegularToy {
     @Override
     public String getProperty() {
         return concat("Кукла " + name + " " + size + " на тему " + theme);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Doll doll)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(size, doll.size) && Objects.equals(theme, doll.theme);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), size, theme);
     }
 }

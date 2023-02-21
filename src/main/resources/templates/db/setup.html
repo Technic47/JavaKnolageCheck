@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SetUp</title>
     <link rel="stylesheet" href="/static/css/container.css"/>
     <link rel="stylesheet" href="/static/css/center.css"/>
     <link rel="stylesheet" href="/static/css/table.css"/>
@@ -123,7 +123,9 @@
         <th>
             <table>
                 <tr th:each="cardGame : ${CardGames}">
-                    <td th:text="${cardGame.getProperty()}">
+                    <td>
+                        <a th:href="@{/db/edit/{id}(id=${cardGame.getId()})}"
+                           th:text="${cardGame.getProperty()}"></a>
                     </td>
                 </tr>
             </table>
@@ -131,7 +133,9 @@
         <th>
             <table>
                 <tr th:each="doll : ${Dolls}">
-                    <td th:text="${doll.getProperty()}">
+                    <td>
+                        <a th:href="@{/db/edit/{id}(id=${doll.getId()})}"
+                           th:text="${doll.getProperty()}"></a>
                     </td>
                 </tr>
             </table>
@@ -139,7 +143,9 @@
         <th>
             <table>
                 <tr th:each="lego : ${Legos}">
-                    <td th:text="${lego.getProperty()}">
+                    <td>
+                        <a th:href="@{/db/edit/{id}(id=${lego.getId()})}"
+                           th:text="${lego.getProperty()}"></a>
                     </td>
                 </tr>
             </table>
@@ -147,7 +153,9 @@
         <th>
             <table>
                 <tr th:each="robot : ${Robots}">
-                    <td th:text="${robot.getProperty()}">
+                    <td>
+                        <a th:href="@{/db/edit/{id}(id=${robot.getId()})}"
+                           th:text="${robot.getProperty()}"></a>
                     </td>
                 </tr>
             </table>

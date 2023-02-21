@@ -2,6 +2,8 @@ package ru.homework.task2.models.Toys.toyClasses;
 
 import ru.homework.task2.models.Toys.abstacts.EasyToy;
 
+import java.util.Objects;
+
 import static org.thymeleaf.util.StringUtils.concat;
 
 public class CardGame extends EasyToy {
@@ -38,5 +40,18 @@ public class CardGame extends EasyToy {
     @Override
     public String getProperty() {
         return concat("Игра " + name + " для " + peopleCount + " человек(а) на тему " + theme);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CardGame cardGame)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(peopleCount, cardGame.peopleCount) && Objects.equals(theme, cardGame.theme);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), peopleCount, theme);
     }
 }

@@ -7,4 +7,9 @@ public abstract class RegularToy extends Toy {
 
     public RegularToy() {
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

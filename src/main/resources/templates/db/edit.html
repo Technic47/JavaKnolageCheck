@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/container.css"/>
+    <link rel="stylesheet" href="/static/css/center.css"/>
+    <link rel="stylesheet" href="/static/css/table.css"/>
+    <link rel="stylesheet" href="/static/css/text.css"/>
+</head>
+<body>
+<form th:method="POST" th:action="@{/db/edit/{id}(id=${item.getId()})}" th:object="${item}">
+    <div class="main">
+        <div class="center">
+            <p>Настройка игрушки</p>
+            <button type="submit" th:name="edit" th:value=1>Сохранить игрушку</button>
+        </div>
+        <div class="center">
+            <form th:action="@{/}" th:method="GET">
+                <label>
+                    <input th:type="submit" value="Выход">
+                </label>
+            </form>
+        </div>
+        <div class="container">
+            <div class="col-1-1">
+                <p th:text="${type}"></p>
+                <label for="Id">Id:</label>
+                <br/>
+                <input id="Id" th:field="*{id}" type="text"/>
+                <br/>
+                <label for="Name">Название игры:</label>
+                <br/>
+                <input id="Name" th:field="*{name}" type="text"/>
+                <br/>
+                <label for="DropRate">Вероятность выпадения:</label>
+                <br/>
+                <input id="DropRate" th:field="*{dropRate}" type="text"/>
+                <br/>
+                <span th:if="${type} == 'CardGame'">
+                    <label for="peopleCount">Количество игроков:</label>
+                    <br/>
+                    <input id="peopleCount" th:field="*{peopleCount}" type="text"/>
+                    <br/>
+                    <label for="CardGameTheme">Тема игры:</label>
+                    <br/>
+                    <input id="CardGameTheme" th:field="*{theme}" type="text"/>
+                    <br/>
+                </span>
+                <span th:if="${type} == 'Doll'">
+                    <label for="DollSize">Размер:</label>
+                    <br/>
+                    <input id="DollSize" th:field="*{size}" type="text"/>
+                    <br/>
+                    <label for="DollTheme">Тематика куклы:</label>
+                    <br/>
+                    <input id="DollTheme" th:field="*{theme}" type="text"/>
+                    <br/>
+                </span>
+                <span th:if="${type} == 'Lego'">
+                    <label for="LegoSize">Размер:</label>
+                    <br/>
+                    <input id="LegoSize" th:field="*{size}" type="text"/>
+                    <br/>
+                    <label for="LegoTheme">Тематика конструктора:</label>
+                    <br/>
+                    <input id="LegoTheme" th:field="*{theme}" type="text"/>
+                    <br/>
+                </span>
+                <span th:if="${type} == 'Robot'">
+                    <label for="RobotType">Тип:</label>
+                    <br/>
+                    <input id="RobotType" th:field="*{type}" type="text"/>
+                    <br/>
+                    <label for="RobotAction">Действие робота:</label>
+                    <br/>
+                    <input id="RobotAction" th:field="*{action}" type="text"/>
+                    <br/>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

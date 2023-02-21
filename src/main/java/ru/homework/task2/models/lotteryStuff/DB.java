@@ -8,24 +8,33 @@ import ru.homework.task2.models.Toys.toyClasses.Lego;
 import ru.homework.task2.models.Toys.toyClasses.Robot;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import static ru.homework.task2.models.Toys.abstacts.Toy.*;
 
 @Component
 public class DB {
-    private final Set<Droppable> toyRepo;
+    private Set<Droppable> toyRepo;
     private final String path;
     private final Random random;
+    private static Long ID_COUNT = 0L;
 
     public DB() {
         this.path = "src/main/resources/static/db.dat";
         this.toyRepo = new HashSet<>();
         this.random = new Random();
         this.loadBackUp();
+    }
+
+    private void updateLastId() {
+        this.toyRepo
+                .stream()
+                .toList()
+                .forEach(item -> {
+                    if (item.getId() > ID_COUNT) {
+                        ID_COUNT = item.getId();
+                    }
+                });
     }
 
     public void saveBackUp() {
@@ -52,18 +61,35 @@ public class DB {
         }
         try (FileInputStream fis = new FileInputStream(this.path);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
-            this.toyRepo.addAll((Set<Droppable>) ois.readObject());
+            this.toyRepo = (Set<Droppable>) ois.readObject();
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
     }
 
     public void addValue(Toy value) {
+        value.setId(ID_COUNT++);
         this.toyRepo.add(value);
     }
 
     public void delValue(Toy value) {
         this.toyRepo.remove(value);
+    }
+
+    public Droppable getValue(Long id) {
+        Optional<Droppable> first = this.toyRepo.stream().filter(item -> Objects.equals(item.getId(), id))
+                .findFirst();
+        if (first.isEmpty()) {
+            throw new RuntimeException("Toy with id = " + id + " is not present");
+        }
+        return first.get();
+    }
+
+    public void update(Toy value, Long id) {
+        Droppable old = this.getValue(id);
+        this.delValue((Toy) old);
+        value.setId(id);
+        this.toyRepo.add(value);
     }
 
     public EasyToy getRandomEasyToy() {

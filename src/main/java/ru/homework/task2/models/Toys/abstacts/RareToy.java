@@ -9,4 +9,9 @@ public abstract class RareToy extends Toy {
     public RareToy() {
         this.dropRate = RARE_DROP_RATE;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
