@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.homework.task2.models.Toys.abstacts.EasyToy;
+import ru.homework.task2.models.Toys.abstacts.RareToy;
+import ru.homework.task2.models.Toys.abstacts.RegularToy;
 import ru.homework.task2.models.lotteryStuff.DB;
 import ru.homework.task2.models.lotteryStuff.Dropper;
 
@@ -56,10 +59,19 @@ public class MainController {
             model.addAttribute("message", "Вы отгадали слишком мало значений и ничего не выиграли(");
         } else if (result >= 0.2 && result < 0.5) {
             model.addAttribute("message", "Вы отгадали несколько значений, поздравляю!");
+            EasyToy toy = this.db.getRandomEasyToy();
+            this.db.delValue(toy);
+            model.addAttribute("prize", toy);
         } else if (result >= 0.5 && result < 0.8) {
             model.addAttribute("message", "Вы отгадали много значений, поздравляю!");
+            RegularToy toy = this.db.getRandomRegularToy();
+            this.db.delValue(toy);
+            model.addAttribute("prize", toy);
         } else if (result >= 0.8) {
             model.addAttribute("message", "Вы отгадали очень много значений, вы невероятно везучий человек!!!");
+            RareToy toy = this.db.getRandomRareToy();
+            this.db.delValue(toy);
+            model.addAttribute("prize", toy);
         }
         return "/check";
     }

@@ -44,9 +44,9 @@ public class DbSetUpController extends MainController {
     }
 
     private void getDb(Model model){
-        model.addAttribute("CardGames", db.getCardGameRepo());
-        model.addAttribute("Dolls", db.getDollRepo());
-        model.addAttribute("Legos", db.getLegoRepo());
-        model.addAttribute("Robots", db.getRobotRepo());
+        model.addAttribute("CardGames", db.getCardGames());
+        model.addAttribute("Dolls", db.getDolls());
+        model.addAttribute("Legos", db.getLegos());
+        model.addAttribute("Robots", db.getRobots());
     }
 }

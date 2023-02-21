@@ -10,6 +10,9 @@
 
 <h2 th:text="${guestValues}"></h2>
 <p th:text="${message}"></p>
+<div th:if="${guestValues >= 0.2}">
+    <p th:text="'Ваш выигрыш: ' + ${prize.getProperty()}"></p>
+</div>
 
 <form th:action="@{/start}" th:method="POST">
     <label>

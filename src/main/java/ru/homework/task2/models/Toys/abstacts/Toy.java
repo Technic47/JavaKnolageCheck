@@ -6,18 +6,22 @@ public abstract class Toy implements Droppable {
     protected String property;
     protected Double dropRate;
 
+    public static final double REGULAR_DROP_RATE = 0.4;
+    public static final double EASY_DROP_RATE = 0.2;
+    public static final double RARE_DROP_RATE = 0.8;
+
     public Toy(Long id, String name, String property) {
         this.id = id;
         this.name = name;
         this.property = property;
-        this.dropRate = 0.4;
+        this.dropRate = REGULAR_DROP_RATE;
     }
 
     public Toy() {
         this.id = 0L;
         this.name = "";
         this.property = "";
-        this.dropRate = 0.4;
+        this.dropRate = REGULAR_DROP_RATE;
     }
 
     public Long getId() {
