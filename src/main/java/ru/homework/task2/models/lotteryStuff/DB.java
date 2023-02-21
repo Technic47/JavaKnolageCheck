@@ -17,7 +17,7 @@ import static ru.homework.task2.models.Toys.abstacts.Toy.*;
 
 @Component
 public class DB {
-    private Set<Droppable> toyRepo;
+    private final Set<Droppable> toyRepo;
     private final String path;
     private final Random random;
 
@@ -25,10 +25,10 @@ public class DB {
         this.path = "src/main/resources/static/db.dat";
         this.toyRepo = new HashSet<>();
         this.random = new Random();
-//        this.loadBackUp();
+        this.loadBackUp();
     }
 
-    private void saveBackUp() {
+    public void saveBackUp() {
         try (FileOutputStream fos = new FileOutputStream(this.path);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(this.toyRepo);
@@ -37,15 +37,22 @@ public class DB {
         }
     }
 
-    private void loadBackUp() {
-//        File dir = new File(this.path);
-//        if (!dir.exists()) {
-//            dir.mkdir();
-//        }
-
+    public void loadBackUp() {
+        File dir = new File(this.path);
+        if (!dir.exists()) {
+            try {
+                dir.createNewFile();
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (dir.length() == 0) {
+            return;
+        }
         try (FileInputStream fis = new FileInputStream(this.path);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
-            this.toyRepo = (Set<Droppable>) ois.readObject();
+            this.toyRepo.addAll((Set<Droppable>) ois.readObject());
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -82,22 +89,29 @@ public class DB {
         return searchList.get(index);
     }
 
-    public List<Droppable> getCardGames(){
-        return getItems(CardGame.class);
-    }
-    public List<Droppable> getDolls(){
-        return getItems(Doll.class);
-    }
-    public List<Droppable> getLegos(){
-        return getItems(Lego.class);
-    }
-    public List<Droppable> getRobots(){
-        return getItems(Robot.class);
+    public List<Droppable> getCardGames() {
+        return getItemsByClass(CardGame.class);
     }
 
-    private List<Droppable> getItems(Class toyClass) {
+    public List<Droppable> getDolls() {
+        return getItemsByClass(Doll.class);
+    }
+
+    public List<Droppable> getLegos() {
+        return getItemsByClass(Lego.class);
+    }
+
+    public List<Droppable> getRobots() {
+        return getItemsByClass(Robot.class);
+    }
+
+    private List<Droppable> getItemsByClass(Class toyClass) {
         return this.toyRepo.stream().toList()
                 .stream().filter(item -> item.getClass() == toyClass)
                 .toList();
+    }
+
+    public List<Droppable> getAllToys() {
+        return this.toyRepo.stream().toList();
     }
 }

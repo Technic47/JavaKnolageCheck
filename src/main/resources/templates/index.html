@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome!</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/center.css"/>
+    <link rel="stylesheet" href="/static/css/text.css"/>
 </head>
 <body>
 
-<h1> Здравствуйте! </h1>
 
-<form th:action="@{/start}" th:method="POST">
-    <label for="name">Введите своё имя: </label>
-    <input type="text" th:name="name" id="name" >
-    <input type="submit"/>
-</form>
-
+<div class="center">
+    <h1> Здравствуйте! </h1>
+    <form th:action="@{/start}" th:method="POST">
+        <label for="name">Введите своё имя: </label>
+        <input type="text" th:name="name" id="name">
+        <input type="submit"/>
+    </form>
+</div>
 </body>
 </html>

@@ -3,69 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>Lottery</title>
+    <link rel="stylesheet" href="/static/css/container.css"/>
+    <link rel="stylesheet" href="/static/css/center.css"/>
+    <link rel="stylesheet" href="/static/css/table.css"/>
+    <link rel="stylesheet" href="/static/css/text.css"/>
 </head>
 <body>
 
-<h1 th:text="'Здравствуй, ' + ${username}"></h1>
+<div class="center">
+    <h1 th:text="'Здравствуй, ' + ${username}"></h1>
+    <div th:if="${username} == 'admin'">
+        <form th:action="@{/db/setup}">
+            <label>
+                <input th:type="submit" value="Настройка базы игрушек">
+            </label>
+        </form>
+    </div>
+</div>
 
-<div th:if="${username} == 'admin'">
-    <form th:action="@{/db/setup}">
+<div class="main">
+    <div class="container">
+        <div class="col-1-1">
+            <p>
+                Компьютер загадал 10 чисел.
+                Попробуйте угадать их все и получи приз.
+                Вводи либо 0, либо 1.
+            </p>
+            <form th:action="@{/results}" th:method="POST">
+                <div>
+                    <label for="first">#1 : </label>
+                    <input id="first" type="text" th:name="first">
+                </div>
+                <div>
+                    <label for="second">#2 : </label>
+                    <input id="second" type="text" th:name="second">
+                </div>
+                <div>
+                    <label for="third">#3 : </label>
+                    <input id="third" type="text" th:name="third">
+                </div>
+                <div>
+                    <label for="fourth">#4 : </label>
+                    <input id="fourth" type="text" th:name="fourth">
+                </div>
+                <div>
+                    <label for="fifth">#5 : </label>
+                    <input id="fifth" type="text" th:name="fifth">
+                </div>
+                <div>
+                    <label for="sixth">#6 : </label>
+                    <input id="sixth" type="text" th:name="sixth">
+                </div>
+                <div>
+                    <label for="seventh">#7 : </label>
+                    <input id="seventh" type="text" th:name="seventh">
+                </div>
+                <div>
+                    <label for="eighth">#8 : </label>
+                    <input id="eighth" type="text" th:name="eighth">
+                </div>
+                <div>
+                    <label for="ninth">#9 : </label>
+                    <input id="ninth" type="text" th:name="ninth">
+                </div>
+                <div>
+                    <label for="tenth">#10: </label>
+                    <input id="tenth" type="text" th:name="tenth">
+                </div>
+
+                <input type="submit"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    <form th:action="@{/}" th:method="GET">
         <label>
-            <input th:type="submit" value="Настройка базы игрушек">
+            <input th:type="submit" value="Выход">
         </label>
     </form>
 </div>
 
-<p>
-    Компьютер загадал 10 чисел.
-    Попробуйте угадать их все и получи приз.
-    Вводи либо 0, либо 1.
-</p>
+<div class="center">
+    <h3>Игрушки которые можно выиграть:</h3>
+</div>
 
-<form th:action="@{/results}" th:method="POST">
-    <div>
-        <label for="first">#1 : </label>
-        <input id="first" type="text" th:name="first">
-    </div>
-    <div>
-        <label for="second">#2 : </label>
-        <input id="second" type="text" th:name="second">
-    </div>
-    <div>
-        <label for="third">#3 : </label>
-        <input id="third" type="text" th:name="third">
-    </div>
-    <div>
-        <label for="fourth">#4 : </label>
-        <input id="fourth" type="text" th:name="fourth">
-    </div>
-    <div>
-        <label for="fifth">#5 : </label>
-        <input id="fifth" type="text" th:name="fifth">
-    </div>
-    <div>
-        <label for="sixth">#6 : </label>
-        <input id="sixth" type="text" th:name="sixth">
-    </div>
-    <div>
-        <label for="seventh">#7 : </label>
-        <input id="seventh" type="text" th:name="seventh">
-    </div>
-    <div>
-        <label for="eighth">#8 : </label>
-        <input id="eighth" type="text" th:name="eighth">
-    </div>
-    <div>
-        <label for="ninth">#9 : </label>
-        <input id="ninth" type="text" th:name="ninth">
-    </div>
-    <div>
-        <label for="tenth">#10: </label>
-        <input id="tenth" type="text" th:name="tenth">
-    </div>
-
-    <input type="submit"/>
-</form>
+<div class="center">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Сколько цифр нужно угадать</th>
+            <th>Приз</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="toy : ${toys}">
+            <td th:text="${toy.getDropRate() * 10}">
+            </td>
+            <td th:text="${toy.getProperty()}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

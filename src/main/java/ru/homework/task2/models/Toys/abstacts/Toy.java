@@ -1,6 +1,8 @@
 package ru.homework.task2.models.Toys.abstacts;
 
-public abstract class Toy implements Droppable {
+import java.io.Serializable;
+
+public abstract class Toy implements Droppable, Serializable {
     protected Long id;
     protected String name;
     protected String property;

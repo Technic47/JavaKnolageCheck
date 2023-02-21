@@ -33,6 +33,7 @@ public class MainController {
         this.userName = userName;
         model.addAttribute("username", this.userName);
         model.addAttribute("numbers", this.dropper.getIntSet());
+        model.addAttribute("toys", this.db.getAllToys());
         return "/lottery";
     }
 
@@ -74,6 +75,13 @@ public class MainController {
             model.addAttribute("prize", toy);
         }
         return "/check";
+    }
+
+    protected void getToys(Model model) {
+        model.addAttribute("CardGames", db.getCardGames());
+        model.addAttribute("Dolls", db.getDolls());
+        model.addAttribute("Legos", db.getLegos());
+        model.addAttribute("Robots", db.getRobots());
     }
 
     @Autowired

@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Check</title>
+    <link rel="stylesheet" href="/static/css/center.css"/>
+    <link rel="stylesheet" href="/static/css/text.css"/>
 </head>
 <body>
 
-<h1>Ваш результат:</h1>
+<div class="center">
+    <h1>Ваш результат:</h1>
 
-<h2 th:text="${guestValues}"></h2>
-<p th:text="${message}"></p>
-<div th:if="${guestValues >= 0.2}">
-    <p th:text="'Ваш выигрыш: ' + ${prize.getProperty()}"></p>
+    <h2 th:text="${guestValues}"></h2>
+    <p th:text="${message}"></p>
+    <div th:if="${guestValues >= 0.2}">
+        <p th:text="'Ваш выигрыш: ' + ${prize.getProperty()}"></p>
+    </div>
+
+    <form th:action="@{/start}" th:method="POST">
+        <label>
+            <input th:type="submit" value="Ещё раз">
+        </label>
+    </form>
 </div>
 
-<form th:action="@{/start}" th:method="POST">
-    <label>
-        <input th:type="submit" value="Ещё раз">
-    </label>
-</form>
+<div class="center">
+    <form th:action="@{/}" th:method="GET">
+        <label>
+            <input th:type="submit" value="Выход">
+        </label>
+    </form>
+</div>
 
 </body>
 </html>
