@@ -1,8 +1,8 @@
 package ru.homework.task2.models.Toys.abstacts;
 
 public abstract class RareToy extends Toy {
-    public RareToy(Long id, String name, String property) {
-        super(id, name, property);
+    public RareToy(Long id, String name, String property, Double dropRate) {
+        super(id, name, property, dropRate);
         this.dropRate = RARE_DROP_RATE;
     }
 

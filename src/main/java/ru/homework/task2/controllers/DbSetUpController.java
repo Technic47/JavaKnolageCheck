@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.homework.task2.models.Toys.abstacts.Droppable;
-import ru.homework.task2.models.Toys.abstacts.Toy;
 import ru.homework.task2.models.Toys.toyClasses.CardGame;
 import ru.homework.task2.models.Toys.toyClasses.Doll;
 import ru.homework.task2.models.Toys.toyClasses.Lego;
@@ -46,19 +45,55 @@ public class DbSetUpController extends MainController {
     public String edit(Model model, @PathVariable("id") Long id) {
         Droppable toy = this.db.getValue(id);
         String className = toy.getClass().getSimpleName();
-        model.addAttribute("item", toy);
         model.addAttribute("type", className);
+        CardGame cardGame = new CardGame();
+        Doll doll = new Doll();
+        Lego lego;
+        Robot robot;
+//        model.addAttribute("item", toy);
+        switch (className) {
+            case "CardGame" -> {
+                cardGame = new CardGame(toy.getId(), toy.getName(), toy.getProperty(), ((CardGame) toy).getPeopleCount(), ((CardGame) toy).getTheme(), toy.getDropRate());
+                model.addAttribute("cardGame", cardGame);
+                model.addAttribute("doll", new Doll());
+                model.addAttribute("lego", new Lego());
+                model.addAttribute("robot", new Robot());
+            }
+            case "Doll" -> {
+                doll = new Doll(toy.getId(), toy.getName(), toy.getProperty(), ((Doll) toy).getSize(), ((Doll) toy).getTheme(), toy.getDropRate());
+                model.addAttribute("doll", doll);
+                model.addAttribute("cardGame", new CardGame());
+                model.addAttribute("lego", new Lego());
+                model.addAttribute("robot", new Robot());
 
-        model.addAttribute("newCardGame", new CardGame());
-        model.addAttribute("newDoll", new Doll());
-        model.addAttribute("newLego", new Lego());
-        model.addAttribute("newRobot", new Robot());
+            }
+            case "Lego" -> {
+                lego = new Lego(toy.getId(), toy.getName(), toy.getProperty(), ((Lego) toy).getSize(), ((Lego) toy).getTheme(), toy.getDropRate());
+                model.addAttribute("lego", lego);
+                model.addAttribute("cardGame", new CardGame());
+                model.addAttribute("doll", new Doll());
+                model.addAttribute("robot", new Robot());
+            }
+            case "Robot" -> {
+                robot = new Robot(toy.getId(), toy.getName(), toy.getProperty(), ((Robot) toy).getType(), ((Robot) toy).getAction(), toy.getDropRate());
+                model.addAttribute("robot", robot);
+                model.addAttribute("cardGame", new CardGame());
+                model.addAttribute("doll", new Doll());
+                model.addAttribute("lego", new Lego());
+            }
+        }
         return "/db/edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String update(Toy item, Model model, @PathVariable("id") Long id){
-        this.db.update(item, id);
+    public String update(CardGame cardGame,
+                         Doll doll,
+                         Lego lego,
+                         Robot robot,
+//            , Model model
+                         @PathVariable("id") Long id
+    ) {
+//        this.db.update(item, id);
         return "redirect:/db/setup";
     }
 

@@ -20,6 +20,13 @@ public abstract class Toy implements Droppable, Serializable {
         this.dropRate = REGULAR_DROP_RATE;
     }
 
+    public Toy(Long id, String name, String property, Double dropRate) {
+        this.id = id;
+        this.name = name;
+        this.property = property;
+        this.dropRate = dropRate;
+    }
+
     public Toy() {
         this.id = 0L;
         this.name = "";

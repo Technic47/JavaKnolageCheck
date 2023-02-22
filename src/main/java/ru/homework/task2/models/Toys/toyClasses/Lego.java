@@ -10,8 +10,8 @@ public class Lego extends RareToy {
     private String size;
     private String theme;
 
-    public Lego(Long id, String name, String property, String size, String theme) {
-        super(id, name, property);
+    public Lego(Long id, String name, String property, String size, String theme, Double dropRate) {
+        super(id, name, property, dropRate);
         this.size = size;
         this.theme = theme;
     }

@@ -10,8 +10,8 @@ public class CardGame extends EasyToy {
     private String peopleCount;
     private String theme;
 
-    public CardGame(Long id, String name, String property, String peopleCount, String theme) {
-        super(id, name, property);
+    public CardGame(Long id, String name, String property, String peopleCount, String theme, Double dropRate) {
+        super(id, name, property, dropRate);
         this.peopleCount = peopleCount;
         this.theme = theme;
     }

@@ -71,7 +71,9 @@ public class DB {
     }
 
     public Droppable getValue(Long id) {
-        Optional<Droppable> first = this.toyRepo.stream().filter(item -> Objects.equals(item.getId(), id))
+        Optional<Droppable> first = this.toyRepo
+                .stream()
+                .filter(item -> Objects.equals(item.getId(), id))
                 .findFirst();
         if (first.isEmpty()) {
             throw new RuntimeException("Toy with id = " + id + " is not present");
@@ -79,7 +81,7 @@ public class DB {
         return first.get();
     }
 
-    public void update(Toy value, Long id) {
+    public void update(Droppable value, Long id) {
         Droppable old = this.getValue(id);
         this.delValue((Toy) old);
         value.setId(id);

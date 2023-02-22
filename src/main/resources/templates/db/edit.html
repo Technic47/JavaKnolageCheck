@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/static/css/text.css"/>
 </head>
 <body>
-<form th:method="POST" th:action="@{/db/edit/{id}(id=${item.getId()})}" th:object="${item}">
+<form th:action="@{/edit/{id}(id=${item.getId()})}" th:method="POST" th:object="${item}">
     <div class="main">
         <div class="center">
             <p>Настройка игрушки</p>

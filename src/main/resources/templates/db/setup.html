@@ -124,7 +124,7 @@
             <table>
                 <tr th:each="cardGame : ${CardGames}">
                     <td>
-                        <a th:href="@{/db/edit/{id}(id=${cardGame.getId()})}"
+                        <a th:href="@{/edit/{id}(id=${cardGame.getId()})}"
                            th:text="${cardGame.getProperty()}"></a>
                     </td>
                 </tr>
@@ -134,7 +134,7 @@
             <table>
                 <tr th:each="doll : ${Dolls}">
                     <td>
-                        <a th:href="@{/db/edit/{id}(id=${doll.getId()})}"
+                        <a th:href="@{/edit/{id}(id=${doll.getId()})}"
                            th:text="${doll.getProperty()}"></a>
                     </td>
                 </tr>
@@ -144,7 +144,7 @@
             <table>
                 <tr th:each="lego : ${Legos}">
                     <td>
-                        <a th:href="@{/db/edit/{id}(id=${lego.getId()})}"
+                        <a th:href="@{/edit/{id}(id=${lego.getId()})}"
                            th:text="${lego.getProperty()}"></a>
                     </td>
                 </tr>
@@ -154,7 +154,7 @@
             <table>
                 <tr th:each="robot : ${Robots}">
                     <td>
-                        <a th:href="@{/db/edit/{id}(id=${robot.getId()})}"
+                        <a th:href="@{/edit/{id}(id=${robot.getId()})}"
                            th:text="${robot.getProperty()}"></a>
                     </td>
                 </tr>

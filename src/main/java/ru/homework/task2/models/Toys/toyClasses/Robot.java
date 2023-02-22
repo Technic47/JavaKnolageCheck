@@ -10,8 +10,8 @@ public class Robot extends RegularToy {
     private String type;
     private String action;
 
-    public Robot(Long id, String name, String property, String type, String action) {
-        super(id, name, property);
+    public Robot(Long id, String name, String property, String type, String action, Double dropRate) {
+        super(id, name, property, dropRate);
         this.type = type;
         this.action = action;
     }

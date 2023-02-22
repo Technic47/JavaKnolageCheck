@@ -10,8 +10,8 @@ public class Doll extends RegularToy {
     private String size;
     private String theme;
 
-    public Doll(Long id, String name, String property, String size, String theme) {
-        super(id, name, property);
+    public Doll(Long id, String name, String property, String size, String theme, Double dropRate) {
+        super(id, name, property, dropRate);
         this.size = size;
         this.theme = theme;
     }
