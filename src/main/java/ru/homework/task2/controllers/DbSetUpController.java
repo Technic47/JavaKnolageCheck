@@ -10,8 +10,6 @@ import ru.homework.task2.models.Toys.toyClasses.Doll;
 import ru.homework.task2.models.Toys.toyClasses.Lego;
 import ru.homework.task2.models.Toys.toyClasses.Robot;
 
-import java.lang.reflect.Field;
-
 @Controller
 @RequestMapping("/db")
 public class DbSetUpController extends MainController {
@@ -48,24 +46,9 @@ public class DbSetUpController extends MainController {
     public String edit(Model model, @PathVariable("id") Long id) {
         Droppable toy = this.db.getValue(id);
         String className = toy.getClass().getSimpleName();
-        switch (className) {
-            case "CardGame" -> {
-                model.addAttribute("type", className);
-                model.addAttribute("item", (CardGame) toy);
-            }
-            case "Doll" -> {
-                model.addAttribute("type", className);
-                model.addAttribute("item", (Doll) toy);
-            }
-            case "Lego" -> {
-                model.addAttribute("type", className);
-                model.addAttribute("item", (Lego) toy);
-            }
-            case "Robot" -> {
-                model.addAttribute("type", className);
-                model.addAttribute("item", (Robot) toy);
-            }
-        }
+        model.addAttribute("item", toy);
+        model.addAttribute("type", className);
+
         model.addAttribute("newCardGame", new CardGame());
         model.addAttribute("newDoll", new Doll());
         model.addAttribute("newLego", new Lego());

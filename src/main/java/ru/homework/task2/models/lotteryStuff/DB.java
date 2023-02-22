@@ -24,17 +24,11 @@ public class DB {
         this.toyRepo = new HashSet<>();
         this.random = new Random();
         this.loadBackUp();
+        this.updateLastId();
     }
 
     private void updateLastId() {
-        this.toyRepo
-                .stream()
-                .toList()
-                .forEach(item -> {
-                    if (item.getId() > ID_COUNT) {
-                        ID_COUNT = item.getId();
-                    }
-                });
+        ID_COUNT = (long) this.toyRepo.size();
     }
 
     public void saveBackUp() {
