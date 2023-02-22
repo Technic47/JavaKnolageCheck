@@ -16,7 +16,7 @@ import ru.homework.task2.models.lotteryStuff.Dropper;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    private String userName;
+    private static String USER_NAME = "Default";
     private Dropper dropper;
     protected DB db;
 
@@ -30,8 +30,8 @@ public class MainController {
             @RequestParam(value = "name", required = false) String userName,
             Model model
     ) {
-        this.userName = userName;
-        model.addAttribute("username", this.userName);
+        USER_NAME = userName;
+        model.addAttribute("username", USER_NAME);
         model.addAttribute("numbers", this.dropper.getIntSet());
         model.addAttribute("toys", this.db.getAllToys());
         return "/lottery";

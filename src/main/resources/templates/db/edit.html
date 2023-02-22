@@ -9,78 +9,125 @@
     <link rel="stylesheet" href="/static/css/text.css"/>
 </head>
 <body>
-<form th:action="@{/edit/{id}(id=${item.getId()})}" th:method="POST" th:object="${item}">
-    <div class="main">
-        <div class="center">
-            <p>Настройка игрушки</p>
-            <button type="submit" th:name="edit" th:value=1>Сохранить игрушку</button>
-        </div>
-        <div class="center">
-            <form th:action="@{/}" th:method="GET">
-                <label>
-                    <input th:type="submit" value="Выход">
-                </label>
+<div class="main">
+    <div class="center">
+        <form th:action="@{/}" th:method="GET">
+            <label>
+                <input th:type="submit" value="Выход">
+            </label>
+        </form>
+    </div>
+    <div class="container">
+        <div class="col-1-1" th:if="${type} == 'CardGame'">
+            <h3>Настройка настольной игры</h3>
+            <form th:action="@{/db/edit/{id}(id=${cardGame.getId()})}" th:method="POST" th:object="${cardGame}">
+                <p th:text="${type}"></p>
+                <label for="cardGameId">Id:</label>
+                <br/>
+                <input id="cardGameId" th:field="*{id}" type="text"/>
+                <br/>
+                <label for="CardGameName">Введите название игры:</label>
+                <br/>
+                <input id="CardGameName" th:field="*{name}" type="text"/>
+                <br/>
+                <label for="peopleCount">Введите количество игроков:</label>
+                <br/>
+                <input id="peopleCount" th:field="*{peopleCount}" type="text"/>
+                <br/>
+                <label for="CardGameTheme">Введите тему игры:</label>
+                <br/>
+                <input id="CardGameTheme" th:field="*{theme}" type="text"/>
+                <br/>
+                <label for="cardGameDropRate">Вероятность выпадения:</label>
+                <br/>
+                <input id="cardGameDropRate" th:field="*{dropRate}" type="text"/>
+                <br/>
+                <button th:name="itemType" th:value="CardGame" type="submit">Сохранить</button>
             </form>
         </div>
-        <div class="container">
-            <div class="col-1-1">
+        <div class="col-1-1" th:if="${type} == 'Doll'">
+            <h3>Настройка куклы</h3>
+            <form th:action="@{/db/edit/{id}(id=${doll.getId()})}" th:method="POST" th:object="${doll}">
                 <p th:text="${type}"></p>
-                <label for="Id">Id:</label>
+                <label for="dollId">Id:</label>
                 <br/>
-                <input id="Id" th:field="*{id}" type="text"/>
+                <input id="dollId" th:field="*{id}" type="text"/>
                 <br/>
-                <label for="Name">Название игры:</label>
+                <label for="DollName">Введите название куклы:</label>
                 <br/>
-                <input id="Name" th:field="*{name}" type="text"/>
+                <input id="DollName" th:field="*{name}" type="text"/>
                 <br/>
-                <label for="DropRate">Вероятность выпадения:</label>
+                <label for="DollSize">Введите размер куклы (большая/маленькая):</label>
                 <br/>
-                <input id="DropRate" th:field="*{dropRate}" type="text"/>
+                <input id="DollSize" th:field="*{size}" type="text"/>
                 <br/>
-                <span th:if="${type} == 'CardGame'">
-                    <label for="peopleCount">Количество игроков:</label>
-                    <br/>
-                    <input id="peopleCount" th:field="*{peopleCount}" type="text"/>
-                    <br/>
-                    <label for="CardGameTheme">Тема игры:</label>
-                    <br/>
-                    <input id="CardGameTheme" th:field="*{theme}" type="text"/>
-                    <br/>
-                </span>
-                <span th:if="${type} == 'Doll'">
-                    <label for="DollSize">Размер:</label>
-                    <br/>
-                    <input id="DollSize" th:field="*{size}" type="text"/>
-                    <br/>
-                    <label for="DollTheme">Тематика куклы:</label>
-                    <br/>
-                    <input id="DollTheme" th:field="*{theme}" type="text"/>
-                    <br/>
-                </span>
-                <span th:if="${type} == 'Lego'">
-                    <label for="LegoSize">Размер:</label>
-                    <br/>
-                    <input id="LegoSize" th:field="*{size}" type="text"/>
-                    <br/>
-                    <label for="LegoTheme">Тематика конструктора:</label>
-                    <br/>
-                    <input id="LegoTheme" th:field="*{theme}" type="text"/>
-                    <br/>
-                </span>
-                <span th:if="${type} == 'Robot'">
-                    <label for="RobotType">Тип:</label>
-                    <br/>
-                    <input id="RobotType" th:field="*{type}" type="text"/>
-                    <br/>
-                    <label for="RobotAction">Действие робота:</label>
-                    <br/>
-                    <input id="RobotAction" th:field="*{action}" type="text"/>
-                    <br/>
-                </span>
-            </div>
+                <label for="DollTheme">Введите тематику куклы:</label>
+                <br/>
+                <input id="DollTheme" th:field="*{theme}" type="text"/>
+                <br/>
+                <label for="dollDropRate">Вероятность выпадения:</label>
+                <br/>
+                <input id="dollDropRate" th:field="*{dropRate}" type="text"/>
+                <br/>
+                <button th:name="itemType" th:value="Doll" type="submit">Сохранить</button>
+            </form>
+        </div>
+        <div class="col-1-1" th:if="${type} == 'Lego'">
+            <h3>Настройка конструктора</h3>
+            <form th:action="@{/db/edit/{id}(id=${lego.getId()})}" th:method="POST" th:object="${lego}">
+                <p th:text="${type}"></p>
+                <label for="legoId">Id:</label>
+                <br/>
+                <input id="legoId" th:field="*{id}" type="text"/>
+                <br/>
+                <label for="LegoName">Введите название конструктора:</label>
+                <br/>
+                <input id="LegoName" th:field="*{name}" type="text"/>
+                <br/>
+                <label for="LegoSize">Введите размер конструктора (большой/маленький):</label>
+                <br/>
+                <input id="LegoSize" th:field="*{size}" type="text"/>
+                <br/>
+                <label for="LegoTheme">Введите тематику конструктора:</label>
+                <br/>
+                <input id="LegoTheme" th:field="*{theme}" type="text"/>
+                <br/>
+                <label for="legoDropRate">Вероятность выпадения:</label>
+                <br/>
+                <input id="legoDropRate" th:field="*{dropRate}" type="text"/>
+                <br/>
+                <button th:name="itemType" th:value="Lego" type="submit">Сохранить</button>
+            </form>
+        </div>
+        <div class="col-1-1" th:if="${type} == 'Robot'">
+            <h3>Настройка робота</h3>
+            <form th:action="@{/db/edit/{id}(id=${robot.getId()})}" th:method="POST" th:object="${robot}">
+                <p th:text="${type}"></p>
+                <label for="robotId">Id:</label>
+                <br/>
+                <input id="robotId" th:field="*{id}" type="text"/>
+                <br/>
+                <label for="RobotName">Введите название робота:</label>
+                <br/>
+                <input id="RobotName" th:field="*{name}" type="text"/>
+                <br/>
+                <label for="RobotType">Введите тип робота:</label>
+                <br/>
+                <input id="RobotType" th:field="*{type}" type="text"/>
+                <br/>
+                <label for="RobotAction">Введите действие робота:</label>
+                <br/>
+                <input id="RobotAction" th:field="*{action}" type="text"/>
+                <br/>
+                <label for="robotDropRate">Вероятность выпадения:</label>
+                <br/>
+                <input id="robotDropRate" th:field="*{dropRate}" type="text"/>
+                <br/>
+                <button th:name="itemType" th:value="Robot" type="submit">Сохранить</button>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 
 </body>

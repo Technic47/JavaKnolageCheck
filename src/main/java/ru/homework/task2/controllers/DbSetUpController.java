@@ -46,8 +46,8 @@ public class DbSetUpController extends MainController {
         Droppable toy = this.db.getValue(id);
         String className = toy.getClass().getSimpleName();
         model.addAttribute("type", className);
-        CardGame cardGame = new CardGame();
-        Doll doll = new Doll();
+        CardGame cardGame;
+        Doll doll;
         Lego lego;
         Robot robot;
 //        model.addAttribute("item", toy);
@@ -86,14 +86,20 @@ public class DbSetUpController extends MainController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(CardGame cardGame,
-                         Doll doll,
-                         Lego lego,
-                         Robot robot,
-//            , Model model
-                         @PathVariable("id") Long id
+    public String update(
+            CardGame cardGame,
+            Doll doll,
+            Lego lego,
+            Robot robot,
+            @RequestParam(value = "itemType") String toyType,
+            @PathVariable("id") Long id
     ) {
-//        this.db.update(item, id);
+        switch (toyType) {
+            case "CardGame" -> this.db.update(cardGame, id);
+            case "Doll" -> this.db.update(doll, id);
+            case "Lego" -> this.db.update(lego, id);
+            case "Robot" -> this.db.update(robot, id);
+        }
         return "redirect:/db/setup";
     }
 
