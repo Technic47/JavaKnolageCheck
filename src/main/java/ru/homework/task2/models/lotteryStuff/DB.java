@@ -136,4 +136,12 @@ public class DB {
     public List<Droppable> getAllToys() {
         return this.toyRepo.stream().toList();
     }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Set<Droppable> getToyRepo() {
+        return toyRepo;
+    }
 }

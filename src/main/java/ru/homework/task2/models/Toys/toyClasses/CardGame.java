@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static org.thymeleaf.util.StringUtils.concat;
 
-public class CardGame extends EasyToy {
+public class CardGame extends EasyToy{
     private String peopleCount;
     private String theme;
 
