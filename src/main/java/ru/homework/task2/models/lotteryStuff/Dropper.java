@@ -2,6 +2,7 @@ package ru.homework.task2.models.lotteryStuff;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Random;
 
 @Component
@@ -15,9 +16,7 @@ public class Dropper {
     }
 
     private void seed() {
-        for (int i = 0; i < intSet.length; i++) {
-            intSet[i] = random.nextInt(0, 2);
-        }
+        Arrays.stream(intSet).forEach(n -> n = random.nextInt(0, 2));
     }
 
     public int[] getIntSet() {

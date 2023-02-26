@@ -9,7 +9,9 @@ import ru.homework.task2.models.Toys.abstacts.RareToy;
 import ru.homework.task2.models.Toys.abstacts.RegularToy;
 import ru.homework.task2.models.Toys.toyClasses.*;
 import ru.homework.task2.models.lotteryStuff.DB;
+import ru.homework.task2.models.lotteryStuff.Dropper;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,14 +20,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class Task2ApplicationTests {
     DB db;
+    Dropper dropper;
     CardGame cardGame;
     Doll doll;
     Lego lego;
     Robot robot;
 
+    /*
+    DB Tests
+     */
     @BeforeEach
     void setUp() {
         this.db = new DB();
+        this.dropper = new Dropper();
         this.cardGame = new CardGame(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);
         this.doll = new Doll(0L, "testName", "testProperty", "testCount", "testtheme", 0.4);
         this.lego = new Lego(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);
@@ -34,12 +41,12 @@ class Task2ApplicationTests {
 
 
     @Test
-    void dbCreation() {
+    void testDbCreation() {
         assertEquals("src/main/resources/static/db.dat", this.db.getPath());
     }
 
     @Test
-    void dbAddValue() {
+    void testDbAddValue() {
         this.db.addValue(cardGame);
         assertThat(this.db.getToyRepo()).isNotEmpty();
         assertTrue(this.cardGame.getId() != 0L);
@@ -132,5 +139,23 @@ class Task2ApplicationTests {
         this.db.addValue(robot);
         List<Droppable> testList = this.db.getAllToys();
         assertThat(testList).isNotEmpty();
+    }
+
+    @Test
+    void testDropperCreation(){
+        assertThat(this.dropper.getIntSet().length).isEqualTo(10);
+    }
+
+    @Test
+    void testDropperSeed(){
+        assertTrue(Arrays.stream(this.dropper.getIntSet()).allMatch(n -> n == 1 || n == 0));
+    }
+
+    @Test
+    void testDropperCheck(){
+        int[] testArr = this.dropper.getIntSet();
+        int[] wrongArr = {2,2,2,2,2,2,2,2,2,2};
+        assertThat(this.dropper.check(testArr)).isEqualTo(1.0);
+        assertThat(this.dropper.check(wrongArr)).isEqualTo(0.0);
     }
 }
