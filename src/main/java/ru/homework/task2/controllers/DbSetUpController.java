@@ -95,10 +95,10 @@ public class DbSetUpController extends MainController {
             @PathVariable("id") Long id
     ) {
         switch (toyType) {
-            case "CardGame" -> this.db.update(cardGame, id);
-            case "Doll" -> this.db.update(doll, id);
-            case "Lego" -> this.db.update(lego, id);
-            case "Robot" -> this.db.update(robot, id);
+            case "CardGame" -> this.db.updateValue(cardGame, id);
+            case "Doll" -> this.db.updateValue(doll, id);
+            case "Lego" -> this.db.updateValue(lego, id);
+            case "Robot" -> this.db.updateValue(robot, id);
         }
         return "redirect:/db/setup";
     }

@@ -81,7 +81,7 @@ public class DB {
         return first.get();
     }
 
-    public void update(Droppable value, Long id) {
+    public void updateValue(Droppable value, Long id) {
         Droppable old = this.getValue(id);
         this.delValue((Toy) old);
         value.setId(id);
