@@ -30,7 +30,9 @@ public class MainController {
             @RequestParam(value = "name", required = false) String userName,
             Model model
     ) {
-        USER_NAME = userName;
+        if (!(userName == null)) {
+            USER_NAME = userName;
+        }
         model.addAttribute("username", USER_NAME);
         model.addAttribute("numbers", this.dropper.getIntSet());
         model.addAttribute("toys", this.db.getAllToys());
