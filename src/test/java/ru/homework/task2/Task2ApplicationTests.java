@@ -16,10 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class Task2ApplicationTests {
+    @Autowired
     DB db;
     @Autowired
     Dropper dropper;
@@ -34,7 +36,6 @@ class Task2ApplicationTests {
      */
     @BeforeEach
     void setUp() {
-        this.db = new DB();
         this.cardGame = new CardGame(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.2);
         this.doll = new Doll(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.4);
         this.lego = new Lego(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.2);
@@ -63,10 +64,14 @@ class Task2ApplicationTests {
 
     @Test
     void testDbGetValue() {
+        Long wrongId = 999999L;
         this.db.addValue(cardGame);
         Long itemId = this.cardGame.getId();
         assertEquals(this.db.getValue(itemId), this.cardGame);
         assertNotEquals(this.db.getValue(0L), this.cardGame);
+        assertThatThrownBy(() -> this.db.getValue(wrongId))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Toy with id = " + wrongId + " is not present");
     }
 
     @Test
@@ -142,6 +147,19 @@ class Task2ApplicationTests {
         List<Droppable> testList = this.db.getAllToys();
         assertThat(testList).isNotEmpty();
     }
+    @Test
+    void testCheckByDropRate(){
+        this.db.addValue(cardGame);
+        this.db.addValue(doll);
+        this.db.addValue(lego);
+        this.db.addValue(robot);
+        assertFalse(this.db.checkByDropRate(0.1));
+        assertTrue(this.db.checkByDropRate(1.0));
+    }
+
+    /*
+    Dropper
+     */
 
     @Test
     void testDropperCreation(){
@@ -160,4 +178,14 @@ class Task2ApplicationTests {
         assertThat(this.dropper.check(testArr)).isEqualTo(1.0);
         assertThat(this.dropper.check(wrongArr)).isEqualTo(0.0);
     }
+    @Test
+    void testDropperGetIntSet(){
+        int[] testArr = this.dropper.getNewIntSet();
+        int[] testArr2 = this.dropper.getIntSet();
+        assertThat(testArr2.length).isEqualTo(10);
+        assertArrayEquals(testArr, testArr2);
+    }
+
+
+
 }

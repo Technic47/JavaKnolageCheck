@@ -43,8 +43,4 @@ public class Dropper {
         guessRate = Math.round(guessRate * 10);
         return guessRate / 10;
     }
-
-    public ArrayHolder getArrayHolder() {
-        return arrayHolder;
-    }
 }
