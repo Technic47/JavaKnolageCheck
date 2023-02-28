@@ -144,4 +144,9 @@ public class DB {
     public Set<Droppable> getToyRepo() {
         return toyRepo;
     }
+
+    public boolean checkByDropRate(double dropRate) {
+        Optional<Droppable> anyToy = this.toyRepo.stream().filter(item -> item.getDropRate() <= dropRate).findAny();
+        return anyToy.isPresent();
+    }
 }

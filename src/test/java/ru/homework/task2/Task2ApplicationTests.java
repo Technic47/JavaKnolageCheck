@@ -27,6 +27,7 @@ class Task2ApplicationTests {
     Doll doll;
     Lego lego;
     Robot robot;
+    static Long DEF_ID = 0L;
 
     /*
     DB Tests
@@ -34,10 +35,10 @@ class Task2ApplicationTests {
     @BeforeEach
     void setUp() {
         this.db = new DB();
-        this.cardGame = new CardGame(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);
-        this.doll = new Doll(0L, "testName", "testProperty", "testCount", "testtheme", 0.4);
-        this.lego = new Lego(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);
-        this.robot = new Robot(0L, "testName", "testProperty", "testCount", "testtheme", 0.6);
+        this.cardGame = new CardGame(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.2);
+        this.doll = new Doll(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.4);
+        this.lego = new Lego(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.2);
+        this.robot = new Robot(DEF_ID, "testName", "testProperty", "testCount", "testtheme", 0.6);
     }
 
 
