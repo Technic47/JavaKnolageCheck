@@ -23,8 +23,12 @@ public class Dropper {
                 .toArray());
     }
 
-    public int[] getIntSet() {
+    public int[] getNewIntSet() {
         this.seed();
+        return this.arrayHolder.getArray();
+    }
+
+    public int[] getIntSet() {
         return this.arrayHolder.getArray();
     }
 

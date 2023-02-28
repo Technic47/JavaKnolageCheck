@@ -5,11 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.homework.task2.models.Toys.abstacts.EasyToy;
 import ru.homework.task2.models.Toys.abstacts.RareToy;
 import ru.homework.task2.models.Toys.abstacts.RegularToy;
@@ -20,7 +16,6 @@ import ru.homework.task2.models.lotteryStuff.Dropper;
 
 @Controller
 @RequestMapping("/")
-@Validated
 public class MainController {
     private static String USER_NAME = "Default";
     private Dropper dropper;
@@ -40,7 +35,7 @@ public class MainController {
             USER_NAME = userName;
         }
         model.addAttribute("username", USER_NAME);
-        model.addAttribute("numbers", this.dropper.getIntSet());
+        model.addAttribute("numbers", this.dropper.getNewIntSet());
         model.addAttribute("toys", this.db.getAllToys());
         model.addAttribute("playerArrayHandler", new ArrayHolder(new int[10]));
         return "/lottery";
@@ -48,11 +43,14 @@ public class MainController {
 
     @PostMapping("/results")
     public String check(
-            @Valid ArrayHolder playerArrayHolder,
+            @Valid @ModelAttribute("playerArrayHandler") ArrayHolder playerArrayHolder,
             BindingResult bindingResult,
             Model model
     ) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("username", USER_NAME);
+            model.addAttribute("numbers", this.dropper.getIntSet());
+            model.addAttribute("toys", this.db.getAllToys());
             return "/lottery";
         }
         double result = dropper.check(playerArrayHolder.getArray());

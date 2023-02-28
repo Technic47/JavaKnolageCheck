@@ -143,17 +143,17 @@ class Task2ApplicationTests {
 
     @Test
     void testDropperCreation(){
-        assertThat(this.dropper.getIntSet().length).isEqualTo(10);
+        assertThat(this.dropper.getNewIntSet().length).isEqualTo(10);
     }
 
     @Test
     void testDropperSeed(){
-        assertTrue(Arrays.stream(this.dropper.getIntSet()).allMatch(n -> n == 1 || n == 0));
+        assertTrue(Arrays.stream(this.dropper.getNewIntSet()).allMatch(n -> n == 1 || n == 0));
     }
 
     @Test
     void testDropperCheck(){
-        int[] testArr = this.dropper.getIntSet();
+        int[] testArr = this.dropper.getNewIntSet();
         int[] wrongArr = {2,2,2,2,2,2,2,2,2,2};
         assertThat(this.dropper.check(testArr)).isEqualTo(1.0);
         assertThat(this.dropper.check(wrongArr)).isEqualTo(0.0);
