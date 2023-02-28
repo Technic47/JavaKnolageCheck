@@ -1,8 +1,11 @@
 package ru.homework.task2.controllers;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +16,10 @@ import ru.homework.task2.models.Toys.abstacts.RegularToy;
 import ru.homework.task2.models.lotteryStuff.DB;
 import ru.homework.task2.models.lotteryStuff.Dropper;
 
+
 @Controller
 @RequestMapping("/")
+@Validated
 public class MainController {
     private static String USER_NAME = "Default";
     private Dropper dropper;
