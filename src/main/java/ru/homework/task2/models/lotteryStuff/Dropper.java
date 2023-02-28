@@ -17,9 +17,10 @@ public class Dropper {
     }
 
     private void seed() {
-        int[] newIntSet = new int[10];
-        Arrays.stream(newIntSet).forEach(n -> n = random.nextInt(0, 2));
-        this.arrayHolder = new ArrayHolder(newIntSet);
+//        int[] newIntSet = new int[10];
+        this.arrayHolder = new ArrayHolder(Arrays.stream(new int[10])
+                .map(n -> n = random.nextInt(0, 2))
+                .toArray());
     }
 
     public int[] getIntSet() {
@@ -37,5 +38,9 @@ public class Dropper {
         }
         guessRate = Math.round(guessRate * 10);
         return guessRate / 10;
+    }
+
+    public ArrayHolder getArrayHolder() {
+        return arrayHolder;
     }
 }

@@ -46,20 +46,24 @@ public class ArrayHolder {
     @Max(1)
     private Integer tenthNumber;
 
-    public int[] getArray(){
+    public int[] getArray() {
         return new int[]{firstNumber, secondNumber, thirdNumber
                 , fourthNumber, fifthNumber, sixthNumber, seventhNumber
                 , eighthNumber, ninthNumber, tenthNumber};
     }
 
-    public void setArray(int[] newArray){
+    public ArrayHolder() {
+    }
+
+    public void setArray(int[] newArray) {
         this.firstNumber = newArray[0];
         this.secondNumber = newArray[1];
         this.thirdNumber = newArray[2];
         this.fourthNumber = newArray[3];
         this.fifthNumber = newArray[4];
         this.sixthNumber = newArray[5];
-        this.seventhNumber =newArray[6];;
+        this.seventhNumber = newArray[6];
+        ;
         this.eighthNumber = newArray[7];
         this.ninthNumber = newArray[8];
         this.tenthNumber = newArray[9];
@@ -72,7 +76,8 @@ public class ArrayHolder {
         this.fourthNumber = newArray[3];
         this.fifthNumber = newArray[4];
         this.sixthNumber = newArray[5];
-        this.seventhNumber =newArray[6];;
+        this.seventhNumber = newArray[6];
+        ;
         this.eighthNumber = newArray[7];
         this.ninthNumber = newArray[8];
         this.tenthNumber = newArray[9];

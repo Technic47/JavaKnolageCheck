@@ -29,46 +29,56 @@
                 Попробуйте угадать их все и получи приз.
                 Вводи либо 0, либо 1.
             </p>
-            <form th:action="@{/results}" th:method="POST">
+            <form th:action="@{/results}" th:method="POST" th:object="${playerArrayHandler}">
                 <div>
-                    <label for="first">#1 : </label>
-                    <input id="first" type="text" th:name="first">
+                    <label for="firstNumber">#1 :</label>
+                    <input id="firstNumber" th:field="*{firstNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{firstNumber}" th:if="${#fields.hasErrors('firstNumber')}"></div>
                 </div>
                 <div>
-                    <label for="second">#2 : </label>
-                    <input id="second" type="text" th:name="second">
+                    <label for="secondNumber">#2 :</label>
+                    <input id="secondNumber" th:field="*{secondNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{secondNumber}" th:if="${#fields.hasErrors('secondNumber')}"></div>
                 </div>
                 <div>
-                    <label for="third">#3 : </label>
-                    <input id="third" type="text" th:name="third">
+                    <label for="thirdNumber">#3 :</label>
+                    <input id="thirdNumber" th:field="*{thirdNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{thirdNumber}" th:if="${#fields.hasErrors('thirdNumber')}"></div>
                 </div>
                 <div>
-                    <label for="fourth">#4 : </label>
-                    <input id="fourth" type="text" th:name="fourth">
+                    <label for="fourthNumber">#4 :</label>
+                    <input id="fourthNumber" th:field="*{fourthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{fourthNumber}" th:if="${#fields.hasErrors('fourthNumber')}"></div>
                 </div>
                 <div>
-                    <label for="fifth">#5 : </label>
-                    <input id="fifth" type="text" th:name="fifth">
+                    <label for="fifthNumber">#5 :</label>
+                    <input id="fifthNumber" th:field="*{fifthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{fifthNumber}" th:if="${#fields.hasErrors('fifthNumber')}"></div>
                 </div>
                 <div>
-                    <label for="sixth">#6 : </label>
-                    <input id="sixth" type="text" th:name="sixth">
+                    <label for="sixthNumber">#6 :</label>
+                    <input id="sixthNumber" th:field="*{sixthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{sixthNumber}" th:if="${#fields.hasErrors('sixthNumber')}"></div>
                 </div>
                 <div>
-                    <label for="seventh">#7 : </label>
-                    <input id="seventh" type="text" th:name="seventh">
+                    <label for="seventhNumber">#7 :</label>
+                    <input id="seventhNumber" th:field="*{seventhNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{seventhNumber}" th:if="${#fields.hasErrors('seventhNumber')}"></div>
                 </div>
                 <div>
-                    <label for="eighth">#8 : </label>
-                    <input id="eighth" type="text" th:name="eighth">
+                    <label for="eighthNumber">#8 :</label>
+                    <input id="eighthNumber" th:field="*{eighthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{eighthNumber}" th:if="${#fields.hasErrors('eighthNumber')}"></div>
                 </div>
                 <div>
-                    <label for="ninth">#9 : </label>
-                    <input id="ninth" type="text" th:name="ninth">
+                    <label for="ninthNumber">#9 :</label>
+                    <input id="ninthNumber" th:field="*{ninthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{ninthNumber}" th:if="${#fields.hasErrors('ninthNumber')}"></div>
                 </div>
                 <div>
-                    <label for="tenth">#10: </label>
-                    <input id="tenth" type="text" th:name="tenth">
+                    <label for="tenthNumber">#10:</label>
+                    <input id="tenthNumber" th:field="*{tenthNumber}" type="text"/>
+                    <div style="color:red" th:errors="*{tenthNumber}" th:if="${#fields.hasErrors('tenthNumber')}"></div>
                 </div>
 
                 <input type="submit"/>

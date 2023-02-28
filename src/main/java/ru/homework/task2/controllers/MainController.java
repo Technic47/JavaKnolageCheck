@@ -1,10 +1,10 @@
 package ru.homework.task2.controllers;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.homework.task2.models.Toys.abstacts.EasyToy;
 import ru.homework.task2.models.Toys.abstacts.RareToy;
 import ru.homework.task2.models.Toys.abstacts.RegularToy;
+import ru.homework.task2.models.lotteryStuff.ArrayHolder;
 import ru.homework.task2.models.lotteryStuff.DB;
 import ru.homework.task2.models.lotteryStuff.Dropper;
 
@@ -41,27 +42,20 @@ public class MainController {
         model.addAttribute("username", USER_NAME);
         model.addAttribute("numbers", this.dropper.getIntSet());
         model.addAttribute("toys", this.db.getAllToys());
+        model.addAttribute("playerArrayHandler", new ArrayHolder(new int[10]));
         return "/lottery";
     }
 
     @PostMapping("/results")
     public String check(
-            @RequestParam(value = "first") Integer firstNumber,
-            @RequestParam(value = "second") Integer secondNumber,
-            @RequestParam(value = "third") Integer thirdNumber,
-            @RequestParam(value = "fourth") Integer fourthNumber,
-            @RequestParam(value = "fifth") Integer fifthNumber,
-            @RequestParam(value = "sixth") Integer sixthNumber,
-            @RequestParam(value = "seventh") Integer seventhNumber,
-            @RequestParam(value = "eighth") Integer eighthNumber,
-            @RequestParam(value = "ninth") Integer ninthNumber,
-            @RequestParam(value = "tenth") Integer tenthNumber,
+            @Valid ArrayHolder playerArrayHolder,
+            BindingResult bindingResult,
             Model model
     ) {
-        int[] values = new int[]{firstNumber, secondNumber, thirdNumber
-                , fourthNumber, fifthNumber, sixthNumber, seventhNumber
-                , eighthNumber, ninthNumber, tenthNumber};
-        double result = dropper.check(values);
+        if (bindingResult.hasErrors()) {
+            return "/lottery";
+        }
+        double result = dropper.check(playerArrayHolder.getArray());
         model.addAttribute("guestValues", result);
         if (result < 0.2) {
             model.addAttribute("message", "Вы отгадали слишком мало значений и ничего не выиграли(");
