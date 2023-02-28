@@ -2,6 +2,7 @@ package ru.homework.task2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.homework.task2.models.Toys.abstacts.Droppable;
 import ru.homework.task2.models.Toys.abstacts.EasyToy;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class Task2ApplicationTests {
     DB db;
+    @Autowired
     Dropper dropper;
     CardGame cardGame;
     Doll doll;
@@ -32,7 +34,6 @@ class Task2ApplicationTests {
     @BeforeEach
     void setUp() {
         this.db = new DB();
-        this.dropper = new Dropper();
         this.cardGame = new CardGame(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);
         this.doll = new Doll(0L, "testName", "testProperty", "testCount", "testtheme", 0.4);
         this.lego = new Lego(0L, "testName", "testProperty", "testCount", "testtheme", 0.2);

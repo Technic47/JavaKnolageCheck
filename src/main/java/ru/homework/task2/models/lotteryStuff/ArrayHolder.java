@@ -3,7 +3,9 @@ package ru.homework.task2.models.lotteryStuff;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ArrayHolder {
     @NotNull
     @Min(0)
@@ -55,19 +57,6 @@ public class ArrayHolder {
     public ArrayHolder() {
     }
 
-    public void setArray(int[] newArray) {
-        this.firstNumber = newArray[0];
-        this.secondNumber = newArray[1];
-        this.thirdNumber = newArray[2];
-        this.fourthNumber = newArray[3];
-        this.fifthNumber = newArray[4];
-        this.sixthNumber = newArray[5];
-        this.seventhNumber = newArray[6];
-        ;
-        this.eighthNumber = newArray[7];
-        this.ninthNumber = newArray[8];
-        this.tenthNumber = newArray[9];
-    }
 
     public ArrayHolder(int[] newArray) {
         this.firstNumber = newArray[0];
@@ -83,20 +72,6 @@ public class ArrayHolder {
         this.tenthNumber = newArray[9];
     }
 
-    public ArrayHolder(Integer firstNumber, Integer secondNumber, Integer thirdNumber, Integer fourthNumber,
-                       Integer fifthNumber, Integer sixthNumber, Integer seventhNumber, Integer eighthNumber,
-                       Integer ninthNumber, Integer tenthNumber) {
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
-        this.thirdNumber = thirdNumber;
-        this.fourthNumber = fourthNumber;
-        this.fifthNumber = fifthNumber;
-        this.sixthNumber = sixthNumber;
-        this.seventhNumber = seventhNumber;
-        this.eighthNumber = eighthNumber;
-        this.ninthNumber = ninthNumber;
-        this.tenthNumber = tenthNumber;
-    }
 
     public Integer getFirstNumber() {
         return firstNumber;
